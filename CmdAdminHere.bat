@@ -11,8 +11,10 @@ REM
 if ["%~1"]==[""] (
     SET HERE=%CD%
 ) else (
-    REM Allows users to not quote paths with spaces.
+    REM Using `%*` merges all user-supplied arguments, allowing unquoted 
+    REM paths containing spaces.
     SET HERE=%*
 )
 
+REM `mshta` is faster than `PowerShell Start-Process -Verb RunAs ...` albeit way uglier.
 mshta vbscript:Execute("CreateObject(""Shell.Application"").ShellExecute(""cmd"", ""/s /k pushd """"%HERE%\"""" "", """", ""runas"", 1)(window.close)")

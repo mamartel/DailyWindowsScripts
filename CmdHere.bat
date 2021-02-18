@@ -11,9 +11,9 @@ REM
 if ["%~1"]==[""] (
     SET HERE=%CD%
 ) else (
-    REM Allows users to not quote paths with spaces.
+    REM Using `%*` merges all user-supplied arguments, allowing unquoted 
+    REM paths containing spaces.
     SET HERE=%*
 )
 
-REM Must end with `\`. There can be multiple.
 start cmd /k pushd "%here%\"
